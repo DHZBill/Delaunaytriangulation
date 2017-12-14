@@ -46,7 +46,7 @@ namespace DivideAndConquer
         }
 
         
-
+        // Simply merge 2 triangulations by adding their vertices and edges to a new one
         public void MergeTriangulation(Triangulation tl, Triangulation tr)
         {
             foreach (var vertex in tl.Vertices) this.AddVertex(vertex);
@@ -56,7 +56,8 @@ namespace DivideAndConquer
             foreach (var edge in tr.Edges) this.AddEdge(edge);
 
         }
-
+        
+        // Add a new LR-edge
         public void AddLREdge(Triangulation tl, Triangulation tr, Edge b)
         {
 
@@ -109,7 +110,8 @@ namespace DivideAndConquer
                 AddLREdge(tl, tr, baseEdge);
             }
         }
-
+        
+        // Find the first and second potential candidates
         public static Point findPotentialCandidate(Triangulation tri, List<Point> ptList, Edge e, bool left)
 
         {
@@ -137,6 +139,7 @@ namespace DivideAndConquer
             return null;
         }
         
+        // Find the angle from the base edge to the potential candidate
         public static double FindAngle(Edge baseEdge, Point candidate, bool left)
         {
             var p1 = new Point();
@@ -161,19 +164,22 @@ namespace DivideAndConquer
             var radian = Math.Atan2(det, dot);
             return radian;
         }
-
+        
+        // Find the bottom most point of a triangulation
         public Point BottomMostPoint()
         {
             var sorted = new List<Point>();
             sorted = this.Vertices.OrderBy(t => t.Y()).ThenByDescending(t => t.X()).ToList();
             return sorted[0];
         }
-
+        
+        // Find the base edge merging 2 triangulations
         public Edge findBaseEdge(Triangulation tr1, Triangulation tr2)
         {
             return new Edge(tr1.BottomMostPoint(), tr2.BottomMostPoint());
         }
-
+        
+        // Merge 2 triangulations
         public void Triangulate(Triangulation tl, Triangulation tr)
         {
             baseEdge = findBaseEdge(tl, tr);

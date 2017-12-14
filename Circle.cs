@@ -21,13 +21,16 @@ namespace DivideAndConquer
         {
             return radius;
         }
-
+        
+        // Check if the point is inside of the given circle
         public static bool pointInCircle(Point p, Circle c)
         {
             var distance = Math.Sqrt((p.X() - c.GetCenter().X()) * (p.X() - c.GetCenter().X()) +
                                      (p.Y() - c.GetCenter().Y()) * (p.Y() - c.GetCenter().Y()));
             return distance <= c.GetRadius();
         }
+        
+        // Returns a circle defined by center and radius given 3 points on the circle
         public static Circle getCircle(Point p1, Point p2, Point p3)
         {
             var x1 = p1.X();
